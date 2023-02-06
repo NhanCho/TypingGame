@@ -16,6 +16,13 @@ function addScore(){
     placeWords.innerHTML = randomWord;
     scoreBoard.innerHTML = "" + Score;
     Input.value ="";
+    timerHTML.innerHTML=10;
+}
+function subScore(){
+    randomWord = Words[Math.floor((Math.random()*Words.length))];
+    placeWords.innerHTML = randomWord;
+    scoreBoard.innerHTML = Score;
+    Input.value ="";
 }
 
 let timerInterval=  setInterval(Timer,1000);
@@ -42,7 +49,7 @@ Input.addEventListener('keyup',(event)=>{
             if(Score<=0){
                 Score=0;
             }
-           addScore();
+           subScore();
         }
         else {
             Score++;
