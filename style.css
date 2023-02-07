@@ -58,6 +58,7 @@ html,body{
     font-size: larger;
     font-family: 'Times New Roman', Times, serif;
     font-weight: bold;
+    font-size: larger ;
 }
 #time_Set{
     display: flex;
@@ -80,7 +81,7 @@ html,body{
     transform: rotate(-250deg);
 }
 .Box{
-    height: 105px;
+    height: 107px;
     background-color: blanchedalmond;
 }
 #Keyboard{

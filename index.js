@@ -27,7 +27,7 @@ function subScore(){
 
 let timerInterval=  setInterval(Timer,1000);
 function Timer(){
-    if (timerHTML.innerHTML == 0){ //het tg thi reset
+    if (timerHTML.innerHTML <= 0){ //het tg thi reset
         alert("Het thoi gian");
         timeReset();
     } else {
