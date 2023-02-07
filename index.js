@@ -1,4 +1,4 @@
-let Words =['the','bruh','yeah','ok','yes'];
+let Words =['the','bruh','yeah','ok','yes','lmao','button','dog','why','WHAT'];
 let random = Math.floor((Math.random()*Words.length));
 let timerHTML=document.getElementById('time_Set');
 let timerStop=document.getElementById('btn_Stop');
@@ -28,6 +28,7 @@ function subScore(){
 let timerInterval=  setInterval(Timer,1000);
 function Timer(){
     if (timerHTML.innerHTML == 0){ //het tg thi reset
+        alert("Het thoi gian");
         timeReset();
     } else {
         //Chưa hết thì vẫn đếm ngược
@@ -36,7 +37,6 @@ function Timer(){
 }
 
 function timeReset(){
-    timerHTML.innerHTML=10;
     Score=0;
     addScore();
 }
