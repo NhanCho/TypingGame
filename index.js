@@ -11,9 +11,39 @@ let Words = [
   "WHAT",
 ];
 let random = Math.floor(Math.random() * Words.length);
+let word1 = [
+  "Tab",
+  "Caps lock",
+  "Shift",
+  "Q",
+  "A",
+  "Z",
+  "Y",
+  "H",
+  "N",
+  "U",
+  "J",
+  "M",
+];
+let word2 = ["W", "S", "X", "E", "D", "C", "I", "K", ",", "O", "L", "."];
+let word3 = [
+  "R",
+  "F",
+  "V",
+  "T",
+  "G",
+  "B",
+  "P",
+  ";",
+  "/",
+  "[",
+  "/",
+  "Enter",
+  "'",
+];
 
 let timerHTML = document.getElementById("time_Set");
-let timerStop = document.getElementById("btn_Stop");
+// let timerStop = document.getElementById("btn_Stop");
 let timerRestart = document.getElementById("btn_Restart");
 let placeWords = document.getElementById("place_Word");
 let scoreBoard = document.getElementById("number_Score");
@@ -42,15 +72,23 @@ function Timer() {
   if (timerHTML.innerHTML <= 0) {
     //het tg thi reset
     // alert("Het thoi gian");
-    timeReset();
+    timeStop();
   } else {
     //Chưa hết thì vẫn đếm ngược
     timerHTML.innerHTML = parseInt(timerHTML.innerHTML) - 1;
   }
 }
 
+function timeStop() {
+  clearInterval(Timer);
+  modal.classList.remove("hide");
+  timerHTML.innerHTML = 0;
+  document.getElementById("input_Word").readOnly = true;
+}
+
 function timeReset() {
   Score = 0;
+  document.getElementById("input_Word").readOnly = false;
   addScore();
   timerHTML.innerHTML = 10;
 }
@@ -70,5 +108,59 @@ Input.addEventListener("keyup", (event) => {
     }
   }
 });
-// console.log(timerInterval)
-// console.log(Score);
+
+function handleKeyDown(key) {
+  //Tao tempKey voi key duoc bien doi thanh chu viet hoa
+  const tempKey = key.toUpperCase();
+  //META la nut window
+  if (
+    tempKey === " " ||
+    tempKey === "CONTROL" ||
+    tempKey === "ALT" ||
+    tempKey === "META"
+  ) {
+    return; //Ne cac truong hop bam nut dac biet
+  }
+  //lay trang thai cua tempKey (da duoc in hoa)
+  let keyElement = document.getElementById(tempKey);
+  console.log(keyElement);
+  const key_text = keyElement.textContent;
+  console.log(key_text);
+  //add class Click
+
+  if (word1.includes(key_text)) keyElement.classList.add("Click1");
+
+  if (word2.includes(key_text)) keyElement.classList.add("Click2");
+
+  if (word3.includes(key_text)) keyElement.classList.add("Click3");
+
+  //bo class Click
+  const handleKeyUp = () => {
+    if (word1.includes(key_text)) keyElement.classList.remove("Click1");
+
+    if (word2.includes(key_text)) keyElement.classList.remove("Click2");
+
+    if (word3.includes(key_text)) keyElement.classList.remove("Click3");
+    window.removeEventListener("keyup", handleKeyUp);
+  };
+
+  window.addEventListener("keyup", handleKeyUp);
+}
+
+window.addEventListener("keydown", ({ key }) => {
+  handleKeyDown(key);
+});
+
+let modal = document.querySelector(".modal");
+let btnClose = document.querySelector(".modal_footer button");
+
+function toggleModal() {
+  modal.classList.toggle("hide");
+}
+
+btnClose.addEventListener("click", (e) => {
+  if (e.target == e.currentTarget) {
+    toggleModal();
+    timeReset();
+  }
+});
