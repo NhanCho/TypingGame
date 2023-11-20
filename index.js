@@ -1,21 +1,49 @@
 let Words = [
-  "I love you so much",
-  "What is this ?",
-  "Yeah I know him",
-  "Ok let's go",
-  "Yes I am",
-  "Lmao you are so funny",
-  "Click that button",
-  "Dog",
-  "Why",
+  "the",
+  "bruh",
+  "yeah",
+  "ok",
+  "yes",
+  "lmao",
+  "button",
+  "dog",
+  "why",
   "WHAT",
 ];
 let random = Math.floor(Math.random() * Words.length);
+let word1 = [
+  "Tab",
+  "Caps lock",
+  "Shift",
+  "Q",
+  "A",
+  "Z",
+  "Y",
+  "H",
+  "N",
+  "U",
+  "J",
+  "M",
+];
+let word2 = ["W", "S", "X", "E", "D", "C", "I", "K", ",", "O", "L", "."];
+let word3 = [
+  "R",
+  "F",
+  "V",
+  "T",
+  "G",
+  "B",
+  "P",
+  ";",
+  "/",
+  "[",
+  "/",
+  "Enter",
+  "'",
+];
 
 let timerHTML = document.getElementById("time_Set");
 // let timerStop = document.getElementById("btn_Stop");
-let startButton = document.getElementById("btn_Start");
-let noti = document.getElementById("notification");
 let timerRestart = document.getElementById("btn_Restart");
 let placeWords = document.getElementById("place_Word");
 let scoreBoard = document.getElementById("number_Score");
@@ -24,45 +52,26 @@ let Input = document.getElementById("input_Word");
 let randomWord = Words[random];
 placeWords.innerHTML = randomWord;
 let Score = 0;
-startButton = 0;
-
-// function startGame(){
-//   startButton = setInterval(Timer, 1000);
-// }
-// startButton.addEventListener("click", Timer);
 
 function addScore() {
   randomWord = Words[Math.floor(Math.random() * Words.length)];
   placeWords.innerHTML = randomWord;
   scoreBoard.innerHTML = "" + Score;
   Input.value = "";
-  if (timerHTML.innerHTML <= 0){
-    stopScore();
-  }
+  // timerHTML.innerHTML=10;
 }
-
-function stopScore() {
-  placeWords.innerHTML = "";
-  scoreBoard.innerHTML = "" + Score;
-  
-}
-
 function subScore() {
   randomWord = Words[Math.floor(Math.random() * Words.length)];
   placeWords.innerHTML = randomWord;
   scoreBoard.innerHTML = Score;
   Input.value = "";
-  if (timerHTML.innerHTML <= 0){
-    stopScore();
-  }
 }
 
-setInterval (Timer, 1000);
+setInterval(Timer, 1000);
 function Timer() {
-  // startGame();
-  
   if (timerHTML.innerHTML <= 0) {
     //het tg thi reset
+    // alert("Het thoi gian");
     timeStop();
   } else {
     //Chưa hết thì vẫn đếm ngược
@@ -71,27 +80,16 @@ function Timer() {
 }
 
 function timeStop() {
-  clearInterval(Timer)
+  clearInterval(Timer);
+  modal.classList.remove("hide");
   timerHTML.innerHTML = 0;
-  noti.innerHTML = "HET THOI GIAN!";
-  Input.value = "";
-  window.addEventListener('keydown', event => {
-    console.log(`User pressed: ${event.key}`);
-    event.preventDefault(key);
-    return false;
-  });
-  document.getElementById('input_Word').readOnly = true;
-  placeWords.innerHTML="";
+  document.getElementById("input_Word").readOnly = true;
 }
 
 function timeReset() {
-  Score = 0
-  scoreBoard.innerHTML = "" + Score;
-  noti.innerHTML = "";
-  document.getElementById('input_Word').readOnly = false;
-  document.getElementById('place_Word').disabled = false;
-  randomWord = Words[Math.floor(Math.random() * Words.length)];
-  placeWords.innerHTML = randomWord;
+  Score = 0;
+  document.getElementById("input_Word").readOnly = false;
+  addScore();
   timerHTML.innerHTML = 10;
 }
 timerRestart.addEventListener("click", timeReset);
@@ -100,10 +98,7 @@ Input.addEventListener("keyup", (event) => {
   if (event.key === "Enter") {
     if (Input.value != randomWord) {
       Score--;
-      if(timerHTML.innerHTML<=0){
-       return Score;
-      }
-      else if (Score <= 0) {
+      if (Score <= 0) {
         Score = 0;
       }
       subScore();
@@ -118,24 +113,54 @@ function handleKeyDown(key) {
   //Tao tempKey voi key duoc bien doi thanh chu viet hoa
   const tempKey = key.toUpperCase();
   //META la nut window
-  if (tempKey === " " || tempKey === "CONTROL" || tempKey === "ALT" || tempKey === "META") {
+  if (
+    tempKey === " " ||
+    tempKey === "CONTROL" ||
+    tempKey === "ALT" ||
+    tempKey === "META"
+  ) {
     return; //Ne cac truong hop bam nut dac biet
   }
   //lay trang thai cua tempKey (da duoc in hoa)
   let keyElement = document.getElementById(tempKey);
   console.log(keyElement);
+  const key_text = keyElement.textContent;
+  console.log(key_text);
   //add class Click
-  keyElement.classList.add("Click");
+
+  if (word1.includes(key_text)) keyElement.classList.add("Click1");
+
+  if (word2.includes(key_text)) keyElement.classList.add("Click2");
+
+  if (word3.includes(key_text)) keyElement.classList.add("Click3");
+
   //bo class Click
   const handleKeyUp = () => {
+    if (word1.includes(key_text)) keyElement.classList.remove("Click1");
 
-    keyElement.classList.remove("Click");
+    if (word2.includes(key_text)) keyElement.classList.remove("Click2");
+
+    if (word3.includes(key_text)) keyElement.classList.remove("Click3");
     window.removeEventListener("keyup", handleKeyUp);
   };
+
   window.addEventListener("keyup", handleKeyUp);
 }
+
 window.addEventListener("keydown", ({ key }) => {
   handleKeyDown(key);
 });
-// console.log(timerInterval)
-// console.log(Score);
+
+let modal = document.querySelector(".modal");
+let btnClose = document.querySelector(".modal_footer button");
+
+function toggleModal() {
+  modal.classList.toggle("hide");
+}
+
+btnClose.addEventListener("click", (e) => {
+  if (e.target == e.currentTarget) {
+    toggleModal();
+    timeReset();
+  }
+});
