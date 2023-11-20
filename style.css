@@ -136,6 +136,21 @@ body {
   transform: rotate(-250deg);
 }
 
+#btn_Start {
+  margin-left: 25px;
+  font-size: 4rem;
+  border: none;
+  background: none;
+  transform: rotate(90deg);
+}
+
+
+
+#btn_Start:active {
+ color: #ccc;
+}
+
+
 .Box {
   margin-top: 10px;
 }

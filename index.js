@@ -1,19 +1,20 @@
 let Words = [
-  "the",
-  "bruh",
-  "yeah",
-  "ok",
-  "yes",
-  "lmao",
-  "button",
-  "dog",
-  "why",
+  "I love you so much",
+  "What is this ?",
+  "Yeah I know him",
+  "Ok let's go",
+  "Yes I am",
+  "Lmao you are so funny",
+  "Click that button",
+  "Dog",
+  "Why",
   "WHAT",
 ];
 let random = Math.floor(Math.random() * Words.length);
 
 let timerHTML = document.getElementById("time_Set");
 // let timerStop = document.getElementById("btn_Stop");
+let startButton = document.getElementById("btn_Start");
 let noti = document.getElementById("notification");
 let timerRestart = document.getElementById("btn_Restart");
 let placeWords = document.getElementById("place_Word");
@@ -23,26 +24,45 @@ let Input = document.getElementById("input_Word");
 let randomWord = Words[random];
 placeWords.innerHTML = randomWord;
 let Score = 0;
+startButton = 0;
+
+function startGame(){
+  startButton = setInterval(Timer, 1000);
+}
+startButton.addEventListener("click", Timer);
 
 function addScore() {
   randomWord = Words[Math.floor(Math.random() * Words.length)];
   placeWords.innerHTML = randomWord;
   scoreBoard.innerHTML = "" + Score;
   Input.value = "";
-  // timerHTML.innerHTML=10;
+  if (timerHTML.innerHTML <= 0){
+    stopScore();
+  }
 }
+
+function stopScore() {
+  placeWords.innerHTML = "";
+  scoreBoard.innerHTML = "" + Score;
+  
+}
+
 function subScore() {
   randomWord = Words[Math.floor(Math.random() * Words.length)];
   placeWords.innerHTML = randomWord;
   scoreBoard.innerHTML = Score;
   Input.value = "";
+  if (timerHTML.innerHTML <= 0){
+    stopScore();
+  }
 }
 
-setInterval(Timer, 1000);
+
 function Timer() {
+  startGame();
+  
   if (timerHTML.innerHTML <= 0) {
     //het tg thi reset
-    // alert("Het thoi gian");
     timeStop();
   } else {
     //Chưa hết thì vẫn đếm ngược
@@ -53,15 +73,25 @@ function Timer() {
 function timeStop() {
   clearInterval(Timer)
   timerHTML.innerHTML = 0;
-  noti.innerHTML = "HET THOI GIAN!"
+  noti.innerHTML = "HET THOI GIAN!";
+  Input.value = "";
+  window.addEventListener('keydown', event => {
+    console.log(`User pressed: ${event.key}`);
+    event.preventDefault(key);
+    return false;
+  });
   document.getElementById('input_Word').readOnly = true;
+  placeWords.innerHTML="";
 }
 
 function timeReset() {
-  Score = 0;
-  noti.innerHTML = ""
+  Score = 0
+  scoreBoard.innerHTML = "" + Score;
+  noti.innerHTML = "";
   document.getElementById('input_Word').readOnly = false;
-  addScore();
+  document.getElementById('place_Word').disabled = false;
+  randomWord = Words[Math.floor(Math.random() * Words.length)];
+  placeWords.innerHTML = randomWord;
   timerHTML.innerHTML = 10;
 }
 timerRestart.addEventListener("click", timeReset);
@@ -70,7 +100,10 @@ Input.addEventListener("keyup", (event) => {
   if (event.key === "Enter") {
     if (Input.value != randomWord) {
       Score--;
-      if (Score <= 0) {
+      if(timerHTML.innerHTML<=0){
+       return Score;
+      }
+      else if (Score <= 0) {
         Score = 0;
       }
       subScore();
