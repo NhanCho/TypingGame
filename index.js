@@ -1,14 +1,13 @@
 let Words = [
-  "the",
-  "bruh",
-  "yeah",
-  "ok",
-  "yes",
-  "lmao",
-  "button",
-  "dog",
-  "why",
-  "WHAT",
+  "I love you so much",
+  "What is this?",
+  "Yeah I know him",
+  "Ok let's go",
+  "Yes I am",
+  "You are so funny",
+  "Click that button",
+  "Dog",
+  "Why are we here",
 ];
 let random = Math.floor(Math.random() * Words.length);
 let word1 = [
@@ -45,33 +44,47 @@ let word3 = [
 let timerHTML = document.getElementById("time_Set");
 // let timerStop = document.getElementById("btn_Stop");
 let timerRestart = document.getElementById("btn_Restart");
+let timeStart = document.getElementById("btn_Start");
 let placeWords = document.getElementById("place_Word");
 let scoreBoard = document.getElementById("number_Score");
 let Input = document.getElementById("input_Word");
+let enterKey = document.getElementById("ENTER");
+let modal = document.querySelector(".modal");
+let btnClose = document.querySelector(".modal_footer button");
+let result = document.getElementById("result");
 
 let randomWord = Words[random];
 placeWords.innerHTML = randomWord;
 let Score = 0;
+
+function startGame(){
+  timeStart = setInterval(Timer, 1000);
+}
+// timeStart.addEventListener("click", startGame);
 
 function addScore() {
   randomWord = Words[Math.floor(Math.random() * Words.length)];
   placeWords.innerHTML = randomWord;
   scoreBoard.innerHTML = "" + Score;
   Input.value = "";
-  // timerHTML.innerHTML=10;
+
 }
+
 function subScore() {
   randomWord = Words[Math.floor(Math.random() * Words.length)];
   placeWords.innerHTML = randomWord;
   scoreBoard.innerHTML = Score;
   Input.value = "";
+
 }
 
-setInterval(Timer, 1000);
+
+startGame();
 function Timer() {
+ 
+  // document.timeStart.style.display ="none";
   if (timerHTML.innerHTML <= 0) {
     //het tg thi reset
-    // alert("Het thoi gian");
     timeStop();
   } else {
     //Chưa hết thì vẫn đếm ngược
@@ -79,18 +92,23 @@ function Timer() {
   }
 }
 
+
+
 function timeStop() {
   clearInterval(Timer);
+  result.innerHTML = "Điểm của bạn là: " +Score;
   modal.classList.remove("hide");
+  Input.value = "";
   timerHTML.innerHTML = 0;
   document.getElementById("input_Word").readOnly = true;
+  document.getElementById("ENTER").disabled = true;
 }
 
 function timeReset() {
   Score = 0;
   document.getElementById("input_Word").readOnly = false;
   addScore();
-  timerHTML.innerHTML = 10;
+  timerHTML.innerHTML = 30;
 }
 timerRestart.addEventListener("click", timeReset);
 
@@ -98,7 +116,10 @@ Input.addEventListener("keyup", (event) => {
   if (event.key === "Enter") {
     if (Input.value != randomWord) {
       Score--;
-      if (Score <= 0) {
+      if(timerHTML.innerHTML<=0){
+       return Score;
+      }
+      else if (Score <= 0) {
         Score = 0;
       }
       subScore();
@@ -108,6 +129,7 @@ Input.addEventListener("keyup", (event) => {
     }
   }
 });
+
 
 function handleKeyDown(key) {
   //Tao tempKey voi key duoc bien doi thanh chu viet hoa
@@ -151,8 +173,7 @@ window.addEventListener("keydown", ({ key }) => {
   handleKeyDown(key);
 });
 
-let modal = document.querySelector(".modal");
-let btnClose = document.querySelector(".modal_footer button");
+
 
 function toggleModal() {
   modal.classList.toggle("hide");

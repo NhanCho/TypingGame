@@ -136,6 +136,22 @@ body {
   transform: rotate(-250deg);
 }
 
+#btn_Start {
+  margin-left: 25px;
+  font-size: 4rem;
+  border: none;
+  background: none;
+  transform: rotate(90deg);
+}
+
+#btn_Start:hover {
+  transition: 0.2s;
+}
+
+#btn_Start:active {
+ color: #117c16;
+}
+
 .Box {
   margin-top: 10px;
 }
@@ -268,6 +284,8 @@ body {
 .modal_body {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   padding: 15px;
 }
 
@@ -279,6 +297,7 @@ body {
 .modal_footer {
   padding: 15px;
   text-align: right;
+  margin-top: 10px;
 }
 
 .modal_footer button {
@@ -293,4 +312,9 @@ body {
 
 .hide {
   display: none;
+}
+
+#result{
+  color: #ce2c2c;
+  font-size: 28px;
 }
