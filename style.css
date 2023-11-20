@@ -218,3 +218,79 @@ body {
 #Key3 > div:active {
   font-size: 35px;
 }
+
+.Click1 {
+  border: 2px solid rgb(255, 251, 0) !important;
+  border-bottom: 4px solid rgb(255, 251, 0) !important;
+}
+
+.Click2 {
+  border: 2px solid rgb(0, 115, 255) !important;
+  border-bottom: 4px solid rgb(0, 115, 255) !important;
+}
+
+.Click3 {
+  border: 2px solid rgb(255, 85, 0) !important;
+  border-bottom: 4px solid rgb(255, 85, 0) !important;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal_inner {
+  width: 400px;
+  position: relative;
+  top: 30%;
+  margin: auto;
+  background: white;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.modal_header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background-color: #4566f1;
+  color: white;
+}
+
+.modal_header .title {
+  font-size: 28px;
+}
+
+.modal_body {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+
+.modal_body .desc {
+  font-size: 27px;
+  color: black;
+}
+
+.modal_footer {
+  padding: 15px;
+  text-align: right;
+}
+
+.modal_footer button {
+  padding: 10px 20px;
+  color: white;
+  background: #4566f1;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
+}
