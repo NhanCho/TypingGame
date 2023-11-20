@@ -218,3 +218,12 @@ body {
 #Key3 > div:active {
   font-size: 35px;
 }
+
+.Click{
+  background-color: black !important;
+}
+
+#notification{
+  font-size: 30px;
+  color: #ce2c2c;
+}
