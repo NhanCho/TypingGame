@@ -26,10 +26,10 @@ placeWords.innerHTML = randomWord;
 let Score = 0;
 startButton = 0;
 
-function startGame(){
-  startButton = setInterval(Timer, 1000);
-}
-startButton.addEventListener("click", Timer);
+// function startGame(){
+//   startButton = setInterval(Timer, 1000);
+// }
+// startButton.addEventListener("click", Timer);
 
 function addScore() {
   randomWord = Words[Math.floor(Math.random() * Words.length)];
@@ -57,9 +57,9 @@ function subScore() {
   }
 }
 
-
+setInterval (Timer, 1000);
 function Timer() {
-  startGame();
+  // startGame();
   
   if (timerHTML.innerHTML <= 0) {
     //het tg thi reset
