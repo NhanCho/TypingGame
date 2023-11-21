@@ -11,17 +11,22 @@
 <body>
     <div class="main">
         <div class="heading"><h1 class="gamingName">TYPING GAME</h1></div>
-        <div class="desc"><h2 class="guide">Type the word in the box to get score</h2></div>
+        <div class="desc"><h2 class="guide">Get scores by typing the word correctly</h2></div>
         
         <div class="info">
             <div class="score_Board">
                 <h3 class="mark">Score: </h3>
                 <div id="number_Score">0</div>
             </div>
+
+            <div class="highScore_Board">
+                <h3 class="high_Mark">High Score: </h3>
+                <div id="high_Score">0</div>
+            </div>
+
             <div class="Timer">
                 <div class="title">Timer: </div> 
-                <div id="time_Set">10</div>
-                
+                <div id="time_Set">20</div>
             </div>
         </div>
 
@@ -30,12 +35,11 @@
                 <div id="Place">Word:</div>
                 <div id="place_Word"></div>
             </div>
-            <div id="Input"><input id="input_Word" type="text"> 
+
+            <div id="Input"><input id="input_Word" type="text" placeholder="Type here"> 
                 <div><button id="btn_Restart">&#8634</button></div>
             </div>
         </div>
-
-        
 
         <div id="Keyboard">
             <div class="kbody">
@@ -100,7 +104,6 @@
                 <button>Close</button>
             </div>
         </div>
-        
     </div>
 
     

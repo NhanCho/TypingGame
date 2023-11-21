@@ -99,6 +99,25 @@ body {
   margin-left: 10px;
 }
 
+.highScore_Board {
+  margin-left: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.highScore_Board .high_Mark {
+  font-weight: 600;
+  font-size: 3rem;
+  color: #ce2c2c;
+}
+
+#high_Score {
+  font-weight: 500;
+  font-size: 3rem;
+  margin-left: 10px;
+}
+
 .Timer {
   margin-right: 150px;
   display: flex;
@@ -126,6 +145,7 @@ body {
   font-size: 4rem;
   border: none;
   background: none;
+  cursor: pointer;
 }
 
 #btn_Restart:hover {
@@ -212,11 +232,6 @@ body {
 }
 #Key3 > div {
   margin: 2px 10px 0px 2px;
-}
-#Key1 > div:active,
-#Key2 > div:active,
-#Key3 > div:active {
-  font-size: 35px;
 }
 
 .Click1 {

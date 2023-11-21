@@ -9,6 +9,8 @@ let Words = [
   "dog",
   "why",
   "WHAT",
+  "HELLO",
+  "HOW ARE YOU"
 ];
 let random = Math.floor(Math.random() * Words.length);
 let word1 = [
@@ -35,7 +37,7 @@ let word3 = [
   "B",
   "P",
   ";",
-  "/",
+  "]",
   "[",
   "/",
   "Enter",
@@ -48,16 +50,20 @@ let timerRestart = document.getElementById("btn_Restart");
 let placeWords = document.getElementById("place_Word");
 let scoreBoard = document.getElementById("number_Score");
 let Input = document.getElementById("input_Word");
+let highScoreBoard = document.getElementById("high_Score");
 
 let randomWord = Words[random];
 placeWords.innerHTML = randomWord;
 let Score = 0;
+let highScore = 0;
+let maxScore = 0;
 
 function addScore() {
   randomWord = Words[Math.floor(Math.random() * Words.length)];
   placeWords.innerHTML = randomWord;
   scoreBoard.innerHTML = "" + Score;
   Input.value = "";
+  highScoreBoard.innerHTML = "" + maxScore;
   // timerHTML.innerHTML=10;
 }
 function subScore() {
@@ -67,7 +73,7 @@ function subScore() {
   Input.value = "";
 }
 
-setInterval(Timer, 1000);
+setInterval(Timer, 1300);
 function Timer() {
   if (timerHTML.innerHTML <= 0) {
     //het tg thi reset
@@ -90,7 +96,7 @@ function timeReset() {
   Score = 0;
   document.getElementById("input_Word").readOnly = false;
   addScore();
-  timerHTML.innerHTML = 10;
+  timerHTML.innerHTML = 20;
 }
 timerRestart.addEventListener("click", timeReset);
 
@@ -104,6 +110,8 @@ Input.addEventListener("keyup", (event) => {
       subScore();
     } else {
       Score++;
+      highScore = Score;
+      maxScore = (Score >= highScore) ? Score : highScore;
       addScore();
     }
   }
@@ -126,8 +134,8 @@ function handleKeyDown(key) {
   console.log(keyElement);
   const key_text = keyElement.textContent;
   console.log(key_text);
-  //add class Click
 
+  //add class Click
   if (word1.includes(key_text)) keyElement.classList.add("Click1");
 
   if (word2.includes(key_text)) keyElement.classList.add("Click2");
