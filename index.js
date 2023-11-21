@@ -164,8 +164,8 @@ function startGame() {
 timeStart.addEventListener("click", () => {
   timerHTML.innerHTML = 30;
   check = 1;
-  Input.focus();
   Input.disabled = false;
+  Input.focus();
   timeStart.disabled = true;
   startGame();
 });
