@@ -12,7 +12,7 @@ let Words = [
 let random = Math.floor(Math.random() * Words.length);
 let word1 = [
   "Tab",
-  "Caps lock",
+  "Caps Lock",
   "Shift",
   "Q",
   "A",
@@ -56,18 +56,30 @@ let result = document.getElementById("result");
 let randomWord = Words[random];
 placeWords.innerHTML = randomWord;
 let Score = 0;
+let check = 0;
 
-function startGame(){
-  timeStart = setInterval(Timer, 1000);
+let intervalID;
+
+function startGame() {
+  if (intervalID) {
+    clearInterval(intervalID);
+  }
+  intervalID = setInterval(Timer, 1000);
 }
-// timeStart.addEventListener("click", startGame);
+
+timeStart.addEventListener("click", () => {
+  timerHTML.innerHTML = 30;
+  check = 1;
+  Input.focus();
+  timeStart.disabled = true;
+  startGame();
+});
 
 function addScore() {
   randomWord = Words[Math.floor(Math.random() * Words.length)];
   placeWords.innerHTML = randomWord;
   scoreBoard.innerHTML = "" + Score;
   Input.value = "";
-
 }
 
 function subScore() {
@@ -75,15 +87,11 @@ function subScore() {
   placeWords.innerHTML = randomWord;
   scoreBoard.innerHTML = Score;
   Input.value = "";
-
 }
 
-
-startGame();
 function Timer() {
- 
   // document.timeStart.style.display ="none";
-  if (timerHTML.innerHTML <= 0) {
+  if (timerHTML.innerHTML <= 0 && check == 1) {
     //het tg thi reset
     timeStop();
   } else {
@@ -92,11 +100,11 @@ function Timer() {
   }
 }
 
-
-
 function timeStop() {
-  clearInterval(Timer);
-  result.innerHTML = "Điểm của bạn là: " +Score;
+  clearInterval(intervalID);
+  check = 0;
+  timeStart.disabled = false;
+  result.innerHTML = "Điểm của bạn là: " + Score;
   modal.classList.remove("hide");
   Input.value = "";
   timerHTML.innerHTML = 0;
@@ -116,10 +124,9 @@ Input.addEventListener("keyup", (event) => {
   if (event.key === "Enter") {
     if (Input.value != randomWord) {
       Score--;
-      if(timerHTML.innerHTML<=0){
-       return Score;
-      }
-      else if (Score <= 0) {
+      if (timerHTML.innerHTML <= 0) {
+        return Score;
+      } else if (Score <= 0) {
         Score = 0;
       }
       subScore();
@@ -129,7 +136,6 @@ Input.addEventListener("keyup", (event) => {
     }
   }
 });
-
 
 function handleKeyDown(key) {
   //Tao tempKey voi key duoc bien doi thanh chu viet hoa
@@ -172,8 +178,6 @@ function handleKeyDown(key) {
 window.addEventListener("keydown", ({ key }) => {
   handleKeyDown(key);
 });
-
-
 
 function toggleModal() {
   modal.classList.toggle("hide");

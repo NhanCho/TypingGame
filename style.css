@@ -149,7 +149,7 @@ body {
 }
 
 #btn_Start:active {
- color: #117c16;
+  color: #117c16;
 }
 
 .Box {
@@ -314,7 +314,7 @@ body {
   display: none;
 }
 
-#result{
+#result {
   color: #ce2c2c;
   font-size: 28px;
 }
