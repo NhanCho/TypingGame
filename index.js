@@ -1,13 +1,104 @@
 let Words = [
-  "I love you so much",
-  "What is this?",
-  "Yeah I know him",
-  "Ok let's go",
-  "Yes I am",
-  "You are so funny",
-  "Click that button",
-  "Dog",
-  "Why are we here",
+  "programming",
+  "javascript",
+  "keyboard",
+  "challenge",
+  "developer",
+  "coding",
+  "computer",
+  "algorithm",
+  "victory",
+  "challenge",
+  "frontend",
+  "backend",
+  "responsive",
+  "design",
+  "framework",
+  "open-source",
+  "developer",
+  "application",
+  "repository",
+  "git",
+  "version",
+  "control",
+  "integration",
+  "testing",
+  "debugging",
+  "documentation",
+  "optimization",
+  "database",
+  "authentication",
+  "authorization",
+  "security",
+  "encryption",
+  "deployment",
+  "framework",
+  "framework",
+  "responsive",
+  "design",
+  "repository",
+  "repository",
+  "optimization",
+  "framework",
+  "authentication",
+  "integration",
+  "deployment",
+  "documentation",
+  "responsive",
+  "frontend",
+  "backend",
+  "database",
+  "javascript",
+  "programming",
+  "developer",
+  "coding",
+  "computer",
+  "algorithm",
+  "victory",
+  "challenge",
+  "design",
+  "open-source",
+  "responsive",
+  "repository",
+  "optimization",
+  "database",
+  "integration",
+  "authentication",
+  "testing",
+  "deployment",
+  "framework",
+  "debugging",
+  "version",
+  "security",
+  "encryption",
+  "frontend",
+  "backend",
+  "responsive",
+  "design",
+  "open-source",
+  "developer",
+  "application",
+  "repository",
+  "git",
+  "version",
+  "control",
+  "integration",
+  "testing",
+  "debugging",
+  "documentation",
+  "optimization",
+  "database",
+  "authentication",
+  "authorization",
+  "security",
+  "encryption",
+  "deployment",
+  "framework",
+  "frontend",
+  "backend",
+  "responsive",
+  "design",
+  "repository",
 ];
 let random = Math.floor(Math.random() * Words.length);
 let word1 = [
@@ -57,7 +148,6 @@ let result = document.getElementById("result");
 let randomWord = Words[random];
 placeWords.innerHTML = randomWord;
 let Score = 0;
-let highScore = 0;
 let maxScore = 0;
 let check = 0;
 let intervalID;
@@ -109,6 +199,7 @@ function Timer() {
 
 function timeStop() {
   clearInterval(intervalID);
+  Input.disabled = true;
   check = 0;
   timeStart.disabled = false;
   result.innerHTML = "Điểm của bạn là: " + Score;
@@ -120,10 +211,16 @@ function timeStop() {
 }
 
 function timeReset() {
+  Input.disabled = true;
+  timeStart.disabled = false;
   Score = 0;
   document.getElementById("input_Word").readOnly = false;
   addScore();
   timerHTML.innerHTML = 0;
+  check = 0;
+  if (intervalID) {
+    clearInterval(intervalID);
+  }
 }
 timerRestart.addEventListener("click", timeReset);
 
@@ -137,10 +234,9 @@ Input.addEventListener("keyup", (event) => {
         Score = 0;
       }
       subScore();
-    }else{
+    } else {
       Score++;
-      highScore = Score;
-      maxScore = Score >= highScore ? Score : highScore;
+      maxScore = Score > maxScore ? Score : maxScore;
       addScore();
     }
   }
