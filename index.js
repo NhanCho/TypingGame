@@ -34,7 +34,7 @@ let word3 = [
   "B",
   "P",
   ";",
-  "/",
+  "]",
   "[",
   "/",
   "Enter",
@@ -48,6 +48,7 @@ let timeStart = document.getElementById("btn_Start");
 let placeWords = document.getElementById("place_Word");
 let scoreBoard = document.getElementById("number_Score");
 let Input = document.getElementById("input_Word");
+let highScoreBoard = document.getElementById("high_Score");
 let enterKey = document.getElementById("ENTER");
 let modal = document.querySelector(".modal");
 let btnClose = document.querySelector(".modal_footer button");
@@ -56,9 +57,12 @@ let result = document.getElementById("result");
 let randomWord = Words[random];
 placeWords.innerHTML = randomWord;
 let Score = 0;
+let highScore = 0;
+let maxScore = 0;
 let check = 0;
-
 let intervalID;
+
+Input.disabled = true;
 
 function startGame() {
   if (intervalID) {
@@ -71,6 +75,7 @@ timeStart.addEventListener("click", () => {
   timerHTML.innerHTML = 30;
   check = 1;
   Input.focus();
+  Input.disabled = false;
   timeStart.disabled = true;
   startGame();
 });
@@ -80,6 +85,8 @@ function addScore() {
   placeWords.innerHTML = randomWord;
   scoreBoard.innerHTML = "" + Score;
   Input.value = "";
+  highScoreBoard.innerHTML = "" + maxScore;
+  // timerHTML.innerHTML=10;
 }
 
 function subScore() {
@@ -116,7 +123,7 @@ function timeReset() {
   Score = 0;
   document.getElementById("input_Word").readOnly = false;
   addScore();
-  timerHTML.innerHTML = 30;
+  timerHTML.innerHTML = 0;
 }
 timerRestart.addEventListener("click", timeReset);
 
@@ -130,11 +137,14 @@ Input.addEventListener("keyup", (event) => {
         Score = 0;
       }
       subScore();
-    } else {
+    }else{
       Score++;
+      highScore = Score;
+      maxScore = Score >= highScore ? Score : highScore;
       addScore();
     }
   }
+  return maxScore;
 });
 
 function handleKeyDown(key) {
@@ -154,8 +164,8 @@ function handleKeyDown(key) {
   console.log(keyElement);
   const key_text = keyElement.textContent;
   console.log(key_text);
-  //add class Click
 
+  //add class Click
   if (word1.includes(key_text)) keyElement.classList.add("Click1");
 
   if (word2.includes(key_text)) keyElement.classList.add("Click2");
