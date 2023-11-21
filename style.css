@@ -158,18 +158,20 @@ body {
 
 #btn_Start {
   margin-left: 25px;
-  font-size: 4rem;
+  font-size: 3rem;
   border: none;
   background: none;
-  transform: rotate(90deg);
+  cursor: pointer;
+  /* transform: rotate(90deg); */
 }
 
 #btn_Start:hover {
   transition: 0.2s;
+  font-size: 3.3rem;
 }
 
 #btn_Start:active {
- color: #117c16;
+  color: #117c16 !important;
 }
 
 .Box {
@@ -329,7 +331,7 @@ body {
   display: none;
 }
 
-#result{
+#result {
   color: #ce2c2c;
   font-size: 28px;
 }

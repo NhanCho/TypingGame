@@ -12,7 +12,7 @@ let Words = [
 let random = Math.floor(Math.random() * Words.length);
 let word1 = [
   "Tab",
-  "Caps lock",
+  "Caps Lock",
   "Shift",
   "Q",
   "A",
@@ -59,11 +59,26 @@ placeWords.innerHTML = randomWord;
 let Score = 0;
 let highScore = 0;
 let maxScore = 0;
+let check = 0;
+let intervalID;
+
+Input.disabled = true;
 
 function startGame() {
-  // timeStart = setInterval(Timer, 1000);
+  if (intervalID) {
+    clearInterval(intervalID);
+  }
+  intervalID = setInterval(Timer, 1000);
 }
-// timeStart.addEventListener("click", startGame);
+
+timeStart.addEventListener("click", () => {
+  timerHTML.innerHTML = 30;
+  check = 1;
+  Input.focus();
+  Input.disabled = false;
+  timeStart.disabled = true;
+  startGame();
+});
 
 function addScore() {
   randomWord = Words[Math.floor(Math.random() * Words.length)];
@@ -81,10 +96,9 @@ function subScore() {
   Input.value = "";
 }
 
-startGame();
 function Timer() {
   // document.timeStart.style.display ="none";
-  if (timerHTML.innerHTML <= 0) {
+  if (timerHTML.innerHTML <= 0 && check == 1) {
     //het tg thi reset
     timeStop();
   } else {
@@ -94,7 +108,9 @@ function Timer() {
 }
 
 function timeStop() {
-  clearInterval(Timer);
+  clearInterval(intervalID);
+  check = 0;
+  timeStart.disabled = false;
   result.innerHTML = "Điểm của bạn là: " + Score;
   modal.classList.remove("hide");
   Input.value = "";
@@ -105,10 +121,9 @@ function timeStop() {
 
 function timeReset() {
   Score = 0;
-  
   document.getElementById("input_Word").readOnly = false;
   addScore();
-  timerHTML.innerHTML = 10;
+  timerHTML.innerHTML = 0;
 }
 timerRestart.addEventListener("click", timeReset);
 
